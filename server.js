@@ -8,10 +8,15 @@ server.listen(process.env.PORT, function() {
 
 server.get('/', function(req,res){
     //console.log(req.headers);
-    res.send('Usage: https://salty-retreat-88810.herokuapp.com/api/whoami');
+    res.send('Usage: https://stark-everglades-59365.herokuapp.com/api/whoami');
 });
 
-server.get('/api/whoami', function(request, response) {
+server.get('/api/whoami', function(req, res) {
+    
+    console.log(req.ip);
+    
+    console.log(req.headers['user-agent']);
+    console.log(req.headers['accept-language']);
     
     var o = {
         "ipaddress": "123.456.78.9",
@@ -19,5 +24,5 @@ server.get('/api/whoami', function(request, response) {
         "software": "Windows 7"
     };
 
-    response.send(o);
+    res.send(o);
 });
