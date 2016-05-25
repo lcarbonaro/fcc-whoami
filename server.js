@@ -13,15 +13,18 @@ server.get('/', function(req,res){
 
 server.get('/api/whoami', function(req, res) {
     
-    console.log(req.ip);
+    var reqIP = req.ip;
+    var ipArr = reqIP.split(':');
+    var ip = ipArr[ ipArr.length - 1 ];
     
-    console.log(req.headers['user-agent']);
-    console.log(req.headers['accept-language']);
+    var lang = req.headers['accept-language'].split(',')[0];
+    
+    var os = req.headers['user-agent'].split('(')[1].split(')')[0];
     
     var o = {
-        "ipaddress": "123.456.78.9",
-        "language": "en-CA",
-        "software": "Windows 7"
+        "ipaddress": ip,
+        "language": lang,
+        "software": os
     };
 
     res.send(o);
